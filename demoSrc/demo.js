@@ -1,0 +1,45 @@
+import { Application, Graphics, Rectangle } from "pixi.js";
+import { MouseEventTransmitter } from "../bin/MouseEventTransmitter";
+/**
+ * DOMContentLoaded後の初期化処理。
+ * デモに必要なパーツを一式初期化する。
+ */
+const onDomContentsLoaded = () => {
+  const app = new Application({
+    width: 640,
+    height: 600,
+    backgroundColor: 0x666666
+  });
+  document.body.appendChild(app.view);
+  const g = new Graphics();
+  g.beginFill(0xff0000)
+    .drawRect(0, 0, 32, 32)
+    .endFill();
+  g.hitArea = new Rectangle(0, 0, 32, 32);
+  g.position.set(32);
+  g.interactive = true;
+
+  app.stage.addChild(g);
+
+  const canvas = document.createElement("canvas");
+  canvas.width = 800;
+  canvas.height = 600;
+  document.body.appendChild(canvas);
+
+  const transmitter = new MouseEventTransmitter({
+    transmitTarget: canvas,
+    app: app
+  });
+  canvas.addEventListener("mousedown", e => {
+    console.log(e);
+  });
+};
+
+/**
+ * DOMContentLoaded以降に初期化処理を実行する
+ */
+if (document.readyState !== "loading") {
+  onDomContentsLoaded();
+} else {
+  document.addEventListener("DOMContentLoaded", onDomContentsLoaded);
+}
