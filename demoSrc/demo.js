@@ -30,8 +30,18 @@ const onDomContentsLoaded = () => {
     transmitTarget: canvas,
     app: app
   });
+
   canvas.addEventListener("mousedown", e => {
-    console.log(e);
+    console.log(e.type);
+  });
+  canvas.addEventListener("mouseup", e => {
+    console.log(e.type);
+  });
+  canvas.addEventListener("mousemove", e => {
+    console.log(e.type);
+  });
+  canvas.addEventListener("wheel", e => {
+    console.log(e.type);
   });
 };
 

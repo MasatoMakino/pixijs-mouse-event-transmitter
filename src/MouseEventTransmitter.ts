@@ -36,7 +36,7 @@ export class MouseEventTransmitter {
     });
   }
 
-  private start(): void {
+  public start(): void {
     if (this.isListen) return;
     this.canvas.addEventListener("mousemove", this.onMouseMove, false);
     this.canvas.addEventListener("mousedown", this.onMouseDown, false);
@@ -87,10 +87,7 @@ export class MouseEventTransmitter {
       return;
     }
 
-    //ドラッグ中ではない場合、stageにヒットしたら処理中断
-    const isHit = this.hitTestStage(e);
-    if (isHit) return;
-
+    if (this.hitTestStage(e)) return;
     this.dispatchClone(e);
   }
 
@@ -125,11 +122,7 @@ export class MouseEventTransmitter {
    * @param e
    */
   private onWheelEvent = (e): void => {
-    const isHit = this.hitTestStage(e);
-
-    //カンバスにヒットしなければ伝播。
-    if (isHit) return;
-
+    if (this.hitTestStage(e)) return;
     this.dispatchClone(e);
   };
 
