@@ -1,5 +1,5 @@
 import { Application, Graphics, Rectangle } from "pixi.js";
-import { MouseEventTransmitter } from "../bin/MouseEventTransmitter";
+import { MouseEventTransmitter } from "../lib";
 /**
  * DOMContentLoaded後の初期化処理。
  * デモに必要なパーツを一式初期化する。
