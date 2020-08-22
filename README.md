@@ -4,7 +4,7 @@ Transmit mouse events from pixi.js stage to other canvas.
 
 [![MIT License](http://img.shields.io/badge/license-MIT-blue.svg?style=flat)](LICENSE)
 
-[Github repository](https://github.com/MasatoMakino/pixijs-mouse-event-transmitter)
+[![ReadMe Card](https://github-readme-stats.vercel.app/api/pin/?username=MasatoMakino&repo=pixijs-mouse-event-transmitter&show_owner=true)](https://github.com/MasatoMakino/pixijs-mouse-event-transmitter)
 
 ## Demo
 
@@ -37,10 +37,10 @@ import { MouseEventTransmitter } from "pixijs-mouse-event-transmitter";
 
 const transmitter = new MouseEventTransmitter({
   transmitTarget: canvas, // transmitter target ( dom element )
-  app: app // app instance of pixi.js
+  app: app, // app instance of pixi.js
 });
 
-canvas.addEventListener("mousemove", e => {
+canvas.addEventListener("mousemove", (e) => {
   console.log(e);
 });
 ```
