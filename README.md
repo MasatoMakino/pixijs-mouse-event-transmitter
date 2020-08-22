@@ -3,6 +3,7 @@
 Transmit mouse events from pixi.js stage to other canvas.
 
 [![MIT License](http://img.shields.io/badge/license-MIT-blue.svg?style=flat)](LICENSE)
+[![Maintainability](https://api.codeclimate.com/v1/badges/7131362c8f55827fdb2e/maintainability)](https://codeclimate.com/github/MasatoMakino/pixijs-mouse-event-transmitter/maintainability)
 
 [![ReadMe Card](https://github-readme-stats.vercel.app/api/pin/?username=MasatoMakino&repo=pixijs-mouse-event-transmitter&show_owner=true)](https://github.com/MasatoMakino/pixijs-mouse-event-transmitter)
 
