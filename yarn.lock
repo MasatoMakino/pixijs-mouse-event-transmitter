@@ -4350,8 +4350,8 @@ gulplog@^1.0.0:
     glogg "^1.0.0"
 
 "gulptask-demo-page@https://github.com/MasatoMakino/gulptask-demo-page.git":
-  version "0.2.1"
-  resolved "https://github.com/MasatoMakino/gulptask-demo-page.git#97b1581d81907caf3dc24b10f20dbd3411ae363e"
+  version "0.2.2"
+  resolved "https://github.com/MasatoMakino/gulptask-demo-page.git#b94066a5a15b5617be7e58224b5aec552de6656e"
   dependencies:
     "@babel/core" "^7.11.6"
     "@babel/preset-env" "^7.11.5"
