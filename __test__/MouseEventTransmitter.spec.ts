@@ -1,0 +1,3 @@
+describe("MouseEventTransmitter", () => {
+  test("init", () => {});
+});
