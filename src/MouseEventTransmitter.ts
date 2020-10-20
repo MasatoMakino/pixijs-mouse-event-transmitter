@@ -9,7 +9,16 @@ export class MouseEventTransmitter {
   private transmitTarget: HTMLElement;
   private interactionManager: InteractionManager;
   private canvas: HTMLCanvasElement;
+  /**
+   * 透過元のエレメントをドラッグ中か否か。
+   * @private
+   */
   private isDragging: boolean = false;
+  /**
+   * 透過先のエレメントをドラッグ中か否か。
+   * 例 : stage上のDisplayObjectをドラッグしている間はfalse。
+   * @private
+   */
   private isDraggingTransmitTarget: boolean = false;
   private isListen: boolean;
   private isThrottling: boolean = false;
