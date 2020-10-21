@@ -1,0 +1,22 @@
+env:
+  global:
+    - CC_TEST_REPORTER_ID=cb1c73236f756af10f423f2761ba1b33053d09094e1cd164f1a4fa7a7f81e0a2
+language: node_js
+addons:
+  apt:
+    packages:
+      - xvfb
+install:
+  - export DISPLAY=':99.0'
+  - Xvfb :99 -screen 0 1024x768x24 > /dev/null 2>&1 &
+  - npm install
+node_js:
+  - "10"
+  - "12"
+  - "14"
+before_script:
+  - curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
+  - chmod +x ./cc-test-reporter
+  - ./cc-test-reporter before-build
+after_script:
+  - ./cc-test-reporter after-build --exit-code $TRAVIS_TEST_RESULT
