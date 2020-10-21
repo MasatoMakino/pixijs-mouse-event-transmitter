@@ -1,8 +1,12 @@
 import { Point, Ticker } from "pixi.js";
 export class MouseEventTransmitter {
     constructor(option) {
+        /**
+         * 透過元のエレメントをドラッグ中か否か。
+         * @private
+         */
         this.isDragging = false;
-        this.isDraggingTransmitTarget = false;
+        this.hasStartedDraggingFromTransmitTarget = false;
         this.isThrottling = false;
         /**
          * このフレーム数毎にmouseMoveのヒット処理が行われる。
@@ -23,11 +27,11 @@ export class MouseEventTransmitter {
             if (this.isThrottling) {
                 return;
             }
-            if (this.isDragging && !this.isDraggingTransmitTarget) {
+            if (this.isDragging && !this.hasStartedDraggingFromTransmitTarget) {
                 return;
             }
             this.isThrottling = true;
-            if (this.isDraggingTransmitTarget) {
+            if (this.hasStartedDraggingFromTransmitTarget) {
                 this.dispatchClone(e);
                 return;
             }
@@ -41,7 +45,7 @@ export class MouseEventTransmitter {
         this.onMouseDown = (e) => {
             const isHit = this.hitTestStage(e);
             this.isDragging = true;
-            this.isDraggingTransmitTarget = !isHit;
+            this.hasStartedDraggingFromTransmitTarget = !isHit;
             //カンバスにヒットしなければ伝播。
             if (isHit)
                 return;
@@ -55,7 +59,7 @@ export class MouseEventTransmitter {
         this.onMouseUpLeave = (e) => {
             this.dispatchClone(e);
             this.isDragging = false;
-            this.isDraggingTransmitTarget = false;
+            this.hasStartedDraggingFromTransmitTarget = false;
         };
         /**
          * wheelイベントを透過する。
@@ -114,6 +118,6 @@ export class MouseEventTransmitter {
      * @param e
      */
     hitTestStage(e) {
-        return !!this.interactionManager.hitTest(new Point(e.clientX, e.clientY));
+        return !!this.interactionManager.hitTest(new Point(e.offsetX, e.offsetY));
     }
 }

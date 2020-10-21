@@ -68,8 +68,9 @@
 					<h1>pixijs-mouse-event-transmitter</h1>
 				</a>
 				<p>Transmit mouse events from pixi.js stage to other canvas.</p>
-				<p><a href="LICENSE"><img src="http://img.shields.io/badge/license-MIT-blue.svg?style=flat" alt="MIT License"></a></p>
-				<p><a href="https://github.com/MasatoMakino/pixijs-mouse-event-transmitter">Github repository</a></p>
+				<p><a href="LICENSE"><img src="http://img.shields.io/badge/license-MIT-blue.svg?style=flat" alt="MIT License"></a>
+				<a href="https://codeclimate.com/github/MasatoMakino/pixijs-mouse-event-transmitter/maintainability"><img src="https://api.codeclimate.com/v1/badges/7131362c8f55827fdb2e/maintainability" alt="Maintainability"></a></p>
+				<p><a href="https://github.com/MasatoMakino/pixijs-mouse-event-transmitter"><img src="https://github-readme-stats.vercel.app/api/pin/?username=MasatoMakino&repo=pixijs-mouse-event-transmitter&show_owner=true" alt="ReadMe Card"></a></p>
 				<a href="#demo" id="demo" style="color: inherit; text-decoration: none;">
 					<h2>Demo</h2>
 				</a>
@@ -89,14 +90,14 @@
 				</a>
 				<p>pixijs-mouse-event-transmitter is composed of ES6 modules and TypeScript d.ts files.</p>
 				<p>At first, import classes.</p>
-				<pre><code class="language-js"><span class="hljs-keyword">import</span> { MouseEventTransmitter } <span class="hljs-keyword">from</span> <span class="hljs-string">"pixijs-mouse-event-transmitter"</span>;
+				<pre><code class="language-js"><span class="hljs-keyword">import</span> { MouseEventTransmitter } <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;pixijs-mouse-event-transmitter&quot;</span>;
 
 <span class="hljs-keyword">const</span> transmitter = <span class="hljs-keyword">new</span> MouseEventTransmitter({
   <span class="hljs-attr">transmitTarget</span>: canvas, <span class="hljs-comment">// transmitter target ( dom element )</span>
-  <span class="hljs-attr">app</span>: app <span class="hljs-comment">// app instance of pixi.js</span>
+  <span class="hljs-attr">app</span>: app, <span class="hljs-comment">// app instance of pixi.js</span>
 });
 
-canvas.addEventListener(<span class="hljs-string">"mousemove"</span>, e =&gt; {
+canvas.addEventListener(<span class="hljs-string">&quot;mousemove&quot;</span>, <span class="hljs-function">(<span class="hljs-params">e</span>) =&gt;</span> {
   <span class="hljs-built_in">console</span>.log(e);
 });</code></pre>
 			</div>
@@ -146,6 +147,5 @@ canvas.addEventListener(<span class="hljs-string">"mousemove"</span>, e =&gt; {
 </div>
 <div class="overlay"></div>
 <script src="assets/js/main.js"></script>
-<script>if (location.protocol == 'file:') document.write('<script src="assets/js/search.js"><' + '/script>');</script>
 </body>
 </html>

@@ -7,8 +7,12 @@ export declare class MouseEventTransmitter {
     private transmitTarget;
     private interactionManager;
     private canvas;
+    /**
+     * 透過元のエレメントをドラッグ中か否か。
+     * @private
+     */
     private isDragging;
-    private isDraggingTransmitTarget;
+    private hasStartedDraggingFromTransmitTarget;
     private isListen;
     private isThrottling;
     /**
