@@ -1,7 +1,7 @@
-import { SkipCounter } from "./SkipCounter";
+import { getMouseEvent } from "fake-mouse-event";
+import { Application } from "pixi.js";
 import { MouseEventTransmitter } from "../src";
-import { FakeMouseEventInit, getMouseEvent } from "fake-mouse-event";
-import { Application, Ticker } from "pixi.js";
+import { SkipCounter } from "./SkipCounter";
 
 const initTestMember = () => {
   const spyLog = jest.spyOn(console, "log").mockImplementation((x) => x);
@@ -11,7 +11,6 @@ const initTestMember = () => {
     height: 480,
     backgroundColor: 0x666666,
   });
-  const view = app.view;
   document.body.appendChild(app.view);
 
   const canvas = document.createElement("canvas");
@@ -101,6 +100,10 @@ describe("MouseEventTransmitter", () => {
   test("mouseup", () => {
     dispatchEvent("mouseup");
   });
+  test("wheel", () => {
+    dispatchEvent("wheel");
+  });
+
   test("mousemove", () => {
     dispatchEvent("mousemove");
     spyLog.mockClear();
@@ -110,7 +113,35 @@ describe("MouseEventTransmitter", () => {
     dispatchEvent("mousemove", undefined, false);
     spyLog.mockClear();
 
+    /**
+     * skipMouseMovePerFrame分の更新が進むまで、mousemoveは無視し続ける
+     */
+    skipCounter.update();
+    dispatchEvent("mousemove", undefined, false);
+    spyLog.mockClear();
+
     skipCounter.reset();
+    dispatchEvent("mousemove");
+    spyLog.mockClear();
+  });
+
+  test("drag", () => {
+    dispatchEvent("mousedown");
+    spyLog.mockClear();
+
+    dispatchEvent("mousemove");
+    spyLog.mockClear();
+    /**
+     * 二度目のマウスムーブはスロットリングされる
+     */
+    dispatchEvent("mousemove", undefined, false);
+    spyLog.mockClear();
+
+    /**
+     * ドラッグ中は、1フレーム分updateされれればmousemoveが実行される。
+     * skipMouseMovePerFrameの値は無視する。
+     */
+    skipCounter.update();
     dispatchEvent("mousemove");
     spyLog.mockClear();
   });

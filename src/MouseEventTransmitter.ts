@@ -14,12 +14,7 @@ export class MouseEventTransmitter {
    * @private
    */
   private isDragging: boolean = false;
-  /**
-   * 透過先のエレメントをドラッグ中か否か。
-   * 例 : stage上のDisplayObjectをドラッグしている間はfalse。
-   * @private
-   */
-  private isDraggingTransmitTarget: boolean = false;
+  private hasStartedDraggingFromTransmitTarget: boolean = false;
   private isListen: boolean;
   private isThrottling: boolean = false;
   /**
@@ -77,12 +72,12 @@ export class MouseEventTransmitter {
       return;
     }
 
-    if (this.isDragging && !this.isDraggingTransmitTarget) {
+    if (this.isDragging && !this.hasStartedDraggingFromTransmitTarget) {
       return;
     }
     this.isThrottling = true;
 
-    if (this.isDraggingTransmitTarget) {
+    if (this.hasStartedDraggingFromTransmitTarget) {
       this.dispatchClone(e);
       return;
     }
@@ -107,7 +102,7 @@ export class MouseEventTransmitter {
   private onMouseDown = (e): void => {
     const isHit = this.hitTestStage(e);
     this.isDragging = true;
-    this.isDraggingTransmitTarget = !isHit;
+    this.hasStartedDraggingFromTransmitTarget = !isHit;
 
     //カンバスにヒットしなければ伝播。
     if (isHit) return;
@@ -123,7 +118,7 @@ export class MouseEventTransmitter {
   private onMouseUpLeave = (e): void => {
     this.dispatchClone(e);
     this.isDragging = false;
-    this.isDraggingTransmitTarget = false;
+    this.hasStartedDraggingFromTransmitTarget = false;
   };
   /**
    * wheelイベントを透過する。
@@ -145,6 +140,6 @@ export class MouseEventTransmitter {
    * @param e
    */
   private hitTestStage(e): boolean {
-    return !!this.interactionManager.hitTest(new Point(e.clientX, e.clientY));
+    return !!this.interactionManager.hitTest(new Point(e.offsetX, e.offsetY));
   }
 }
