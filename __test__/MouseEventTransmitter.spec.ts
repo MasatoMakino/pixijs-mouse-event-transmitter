@@ -1,17 +1,27 @@
 import { getMouseEvent } from "fake-mouse-event";
-import { Application } from "pixi.js";
+import { Application, Graphics, Rectangle } from "pixi.js";
 import { MouseEventTransmitter } from "../src";
 import { SkipCounter } from "./SkipCounter";
 
 const initTestMember = () => {
   const spyLog = jest.spyOn(console, "log").mockImplementation((x) => x);
 
+  const W = 640;
+  const H = 480;
   const app = new Application({
-    width: 640,
-    height: 480,
+    width: W,
+    height: H,
     backgroundColor: 0x666666,
   });
   document.body.appendChild(app.view);
+
+  const size = 128;
+  const g = new Graphics();
+  g.beginFill(0xff0000).drawRect(0, 0, size, size).endFill();
+  g.hitArea = new Rectangle(0, 0, size, size);
+  g.position.set(W / 2, H / 2);
+  g.interactive = true;
+  app.stage.addChild(g);
 
   const canvas = document.createElement("canvas");
   canvas.width = 800;
@@ -54,6 +64,8 @@ describe("MouseEventTransmitter", () => {
     transmitter.start();
     skipCounter.reset();
     spyLog.mockClear();
+
+    app.render();
   });
 
   test("init", () => {
@@ -72,70 +84,103 @@ describe("MouseEventTransmitter", () => {
     } else {
       expect(spyLog).not.toBeCalled();
     }
+
+    spyLog.mockClear();
   };
 
   test("start and stop", () => {
     transmitter.start();
     dispatchEvent("mousedown");
-    spyLog.mockClear();
     transmitter.start();
     dispatchEvent("mousedown");
-    spyLog.mockClear();
 
     transmitter.stop();
     dispatchEvent("mousedown", undefined, false);
-    spyLog.mockClear();
     transmitter.stop();
     dispatchEvent("mousedown", undefined, false);
-    spyLog.mockClear();
 
     transmitter.start();
     dispatchEvent("mousedown");
-    spyLog.mockClear();
   });
 
   test("mousedown", () => {
     dispatchEvent("mousedown");
+    dispatchEvent(
+      "mousedown",
+      { offsetX: app.view.width / 2, offsetY: app.view.height / 2 },
+      false
+    );
   });
   test("mouseup", () => {
     dispatchEvent("mouseup");
+    /**
+     * mouseupはstage上のオブジェクトを無視する。
+     */
+    dispatchEvent("mouseup", {
+      offsetX: app.view.width / 2,
+      offsetY: app.view.height / 2,
+    });
   });
   test("wheel", () => {
     dispatchEvent("wheel");
+    dispatchEvent(
+      "wheel",
+      { offsetX: app.view.width / 2, offsetY: app.view.height / 2 },
+      false
+    );
   });
 
   test("mousemove", () => {
     dispatchEvent("mousemove");
-    spyLog.mockClear();
     /**
      * 二度目のマウスムーブはスロットリングされる
      */
     dispatchEvent("mousemove", undefined, false);
-    spyLog.mockClear();
 
     /**
      * skipMouseMovePerFrame分の更新が進むまで、mousemoveは無視し続ける
      */
     skipCounter.update();
     dispatchEvent("mousemove", undefined, false);
-    spyLog.mockClear();
 
     skipCounter.reset();
     dispatchEvent("mousemove");
-    spyLog.mockClear();
+  });
+
+  test("mousemove on interactive object", () => {
+    dispatchEvent(
+      "mousemove",
+      { offsetX: app.view.width / 2, offsetY: app.view.height / 2 },
+      false
+    );
+    dispatchEvent(
+      "mousemove",
+      { offsetX: app.view.width / 2, offsetY: app.view.height / 2 },
+      false
+    );
+
+    skipCounter.update();
+    dispatchEvent(
+      "mousemove",
+      { offsetX: app.view.width / 2, offsetY: app.view.height / 2 },
+      false
+    );
+
+    skipCounter.reset();
+    dispatchEvent(
+      "mousemove",
+      { offsetX: app.view.width / 2, offsetY: app.view.height / 2 },
+      false
+    );
   });
 
   test("drag", () => {
     dispatchEvent("mousedown");
-    spyLog.mockClear();
-
     dispatchEvent("mousemove");
-    spyLog.mockClear();
     /**
      * 二度目のマウスムーブはスロットリングされる
      */
     dispatchEvent("mousemove", undefined, false);
-    spyLog.mockClear();
 
     /**
      * ドラッグ中は、1フレーム分updateされれればmousemoveが実行される。
@@ -143,6 +188,29 @@ describe("MouseEventTransmitter", () => {
      */
     skipCounter.update();
     dispatchEvent("mousemove");
-    spyLog.mockClear();
+  });
+
+  test("drag : start from interactive object", () => {
+    /**
+     * stage上のインタラクティブオブジェクトからドラッグを開始すると、イベントをすべて無視する。
+     */
+    dispatchEvent(
+      "mousedown",
+      { offsetX: app.view.width / 2, offsetY: app.view.height / 2 },
+      false
+    );
+    dispatchEvent("mousemove", undefined, false);
+    skipCounter.update();
+    dispatchEvent("mousemove", undefined, false);
+    skipCounter.reset();
+    dispatchEvent("mousemove", undefined, false);
+
+    /**
+     * マウスアップしてドラッグを再開すると、反応する
+     */
+    dispatchEvent("mouseup");
+    dispatchEvent("mousedown");
+    dispatchEvent("mousemove");
+    dispatchEvent("mousemove", undefined, false);
   });
 });
