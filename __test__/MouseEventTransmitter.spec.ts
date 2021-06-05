@@ -72,6 +72,12 @@ describe("MouseEventTransmitter", () => {
     expect(transmitter).toBeTruthy();
   });
 
+  /**
+   * マウスイベントを発効し、期待されたコールバック関数が実行されるか否かをテストする。
+   * @param type マウスイベントタイプ
+   * @param option マウスイベントの座標値オプション
+   * @param isListen log出力が行われるか否かの期待値 デフォルトでtrue
+   */
   const dispatchEvent = (type: string, option?: any, isListen?: boolean) => {
     if (!option) {
       option = { x: 100, y: 100, offsetX: 100, offsetY: 100 };
