@@ -1,10 +1,11 @@
 import { getMouseEvent } from "fake-mouse-event";
-import { Application, Graphics, Rectangle } from "pixi.js";
+import { Application, Graphics, Rectangle } from "pixi.js-legacy";
 import { MouseEventTransmitter } from "../src";
 import { SkipCounter } from "./SkipCounter";
 
 const initTestMember = () => {
   const spyLog = jest.spyOn(console, "log").mockImplementation((x) => x);
+  const spyError = jest.spyOn(console, "error").mockImplementation((x) => x);
 
   const W = 640;
   const H = 480;
@@ -12,6 +13,7 @@ const initTestMember = () => {
     width: W,
     height: H,
     backgroundColor: 0x666666,
+    forceCanvas: true,
   });
   document.body.appendChild(app.view);
 
@@ -51,12 +53,14 @@ const initTestMember = () => {
     canvas,
     transmitter,
     spyLog,
+    spyError,
     skipCounter,
   };
 };
 
 describe("MouseEventTransmitter", () => {
-  const { app, canvas, transmitter, spyLog, skipCounter } = initTestMember();
+  const { app, canvas, transmitter, spyLog, spyError, skipCounter } =
+    initTestMember();
 
   beforeEach(() => {
     const e = getMouseEvent("mouseup");
@@ -64,6 +68,7 @@ describe("MouseEventTransmitter", () => {
     transmitter.start();
     skipCounter.reset();
     spyLog.mockClear();
+    spyError.mockClear();
 
     app.render();
   });
