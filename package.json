@@ -14,7 +14,7 @@
   "license": "MIT",
   "devDependencies": {
     "@types/jest": "^26.0.23",
-    "@types/node": "^15.0.2",
+    "@types/node": "^15.12.1",
     "canvas": "^2.8.0",
     "fake-mouse-event": "https://github.com/MasatoMakino/fake-mouse-event.git",
     "gulp": "^4.0.2",
@@ -23,12 +23,12 @@
     "gulptask-tsc": "https://github.com/MasatoMakino/gulptask-tsc.git",
     "gulptask-tsdoc": "https://github.com/MasatoMakino/gulptask-tsdoc.git",
     "husky": "^6.0.0",
-    "jest": "^26.6.3",
+    "jest": "^27.0.4",
     "pixi.js": "^6.0.4",
     "pixi.js-legacy": "^6.0.4",
     "prettier": "^2.3.0",
     "pretty-quick": "^3.1.0",
-    "ts-jest": "^26.5.6",
+    "ts-jest": "^27.0.2",
     "ts-node": "^9.1.1",
     "typescript": "^4.2.4"
   },
