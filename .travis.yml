@@ -11,9 +11,9 @@ install:
   - Xvfb :99 -screen 0 1024x768x24 > /dev/null 2>&1 &
   - npm install
 node_js:
-  - "10"
   - "12"
   - "14"
+  - "16"
 before_script:
   - curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
   - chmod +x ./cc-test-reporter
