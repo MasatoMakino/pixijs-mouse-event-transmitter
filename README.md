@@ -31,7 +31,7 @@ npm install https://github.com/MasatoMakino/pixijs-mouse-event-transmitter.git -
 
 ### Import
 
-pixijs-mouse-event-transmitter is composed of ES6 modules and TypeScript d.ts files.
+pixijs-mouse-event-transmitter is composed of ES modules and TypeScript d.ts files.
 
 At first, import classes.
 
