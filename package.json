@@ -23,12 +23,12 @@
     "gulptask-tsc": "https://github.com/MasatoMakino/gulptask-tsc.git",
     "gulptask-tsdoc": "https://github.com/MasatoMakino/gulptask-tsdoc.git",
     "husky": "^6.0.0",
-    "jest": "^26.6.3",
+    "jest": "^27.0.4",
     "pixi.js-legacy": "^6.0.4",
     "prettier": "^2.3.0",
     "pretty-quick": "^3.1.0",
-    "ts-jest": "^26.5.6",
-    "ts-node": "^9.1.1",
+    "ts-jest": "^27.0.3",
+    "ts-node": "^10.0.0",
     "typescript": "^4.2.4"
   },
   "peerDependencies": {
