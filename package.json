@@ -46,5 +46,10 @@
       "pre-commit": "pretty-quick --staged"
     }
   },
-  "dependencies": {}
+  "dependencies": {},
+  "engines": {
+    "node": ">=12.0.0 <17",
+    "npm": "^7.0.0",
+    "yarn": "no support for yarn in this repo. Please use npm."
+  }
 }
