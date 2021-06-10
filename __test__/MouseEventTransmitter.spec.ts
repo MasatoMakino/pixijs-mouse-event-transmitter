@@ -5,7 +5,6 @@ import { SkipCounter } from "./SkipCounter";
 
 const initTestMember = () => {
   const spyLog = jest.spyOn(console, "log").mockImplementation((x) => x);
-  const spyError = jest.spyOn(console, "error").mockImplementation((x) => x);
 
   const W = 640;
   const H = 480;
@@ -53,13 +52,12 @@ const initTestMember = () => {
     canvas,
     transmitter,
     spyLog,
-    spyError,
     skipCounter,
   };
 };
 
 describe("MouseEventTransmitter", () => {
-  const { app, canvas, transmitter, spyLog, spyError, skipCounter } =
+  const { app, canvas, transmitter, spyLog,  skipCounter } =
     initTestMember();
 
   beforeEach(() => {
@@ -68,7 +66,6 @@ describe("MouseEventTransmitter", () => {
     transmitter.start();
     skipCounter.reset();
     spyLog.mockClear();
-    spyError.mockClear();
 
     app.render();
   });
