@@ -30,7 +30,6 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
       - run: npm ci
-      - run: npm run build --if-present
       - run: npm test
 
   coverage:
@@ -49,10 +48,9 @@ jobs:
         with:
           node-version: "14"
       - run: npm ci
-      - run: npm run build --if-present
       - name: Code Climate Coverage Action
         uses: paambaati/codeclimate-action@v2.7.5
         env:
           CC_TEST_REPORTER_ID: cb1c73236f756af10f423f2761ba1b33053d09094e1cd164f1a4fa7a7f81e0a2
         with:
-          coverageCommand: npm coverage
+          coverageCommand: npm run coverage
