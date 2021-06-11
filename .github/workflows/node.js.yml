@@ -32,3 +32,26 @@ jobs:
       - run: npm ci
       - run: npm run build --if-present
       - run: npm test
+
+  coverage:
+    needs: [build]
+    name: coverage
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+        with:
+          persist-credentials: false
+      - name: Reconfigure git to use HTTP authentication
+        run: git config --global url."https://github.com/".insteadOf ssh://git@github.com/
+      - name: Use Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: "12"
+      - run: npm ci
+      - run: npm run build --if-present
+      - uses: paambaati/codeclimate-action@v2.2.4
+        env:
+          CC_TEST_REPORTER_ID: cb1c73236f756af10f423f2761ba1b33053d09094e1cd164f1a4fa7a7f81e0a2
+        with:
+          coverageCommand: npm test
