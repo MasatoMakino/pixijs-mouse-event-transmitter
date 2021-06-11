@@ -35,7 +35,8 @@
     "pixi.js": "^6.0.4"
   },
   "scripts": {
-    "test": "jest --coverage",
+    "test": "jest",
+    "coverage": "jest --coverage",
     "start:dev": "gulp start_dev",
     "build": "gulp build",
     "build:clean": "gulp build_clean",

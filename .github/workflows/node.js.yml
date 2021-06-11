@@ -47,7 +47,7 @@ jobs:
       - name: Use Node.js
         uses: actions/setup-node@v2
         with:
-          node-version: "12"
+          node-version: "14"
       - run: npm ci
       - run: npm run build --if-present
       - name: Code Climate Coverage Action
@@ -55,4 +55,4 @@ jobs:
         env:
           CC_TEST_REPORTER_ID: cb1c73236f756af10f423f2761ba1b33053d09094e1cd164f1a4fa7a7f81e0a2
         with:
-          coverageCommand: npm test
+          coverageCommand: npm coverage
