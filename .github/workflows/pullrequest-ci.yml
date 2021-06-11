@@ -1,10 +1,10 @@
 # This workflow will do a clean install of node dependencies, build the source code and run tests across different versions of node
 # For more information see: https://help.github.com/actions/language-and-framework-guides/using-nodejs-with-github-actions
 
-name: Node.js CI master
+name: Node.js CI PR
 
 on:
-  push:
+  pull_request:
     branches: [master]
 
 jobs:
@@ -38,35 +38,3 @@ jobs:
             node-
       - run: npm ci
       - run: npm test
-
-  coverage:
-    needs: [build]
-    name: coverage
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v2
-        with:
-          persist-credentials: false
-      - name: Reconfigure git to use HTTP authentication
-        run: git config --global url."https://github.com/".insteadOf ssh://git@github.com/
-      - name: Use Node.js
-        uses: actions/setup-node@v2
-        with:
-          node-version: "14"
-      - name: Cache node modules
-        uses: actions/cache@v2
-        env:
-          cache-name: cache-node-modules
-        with:
-          path: ~/.npm
-          key: node-${{ hashFiles('**/package-lock.json') }}
-          restore-keys: |
-            node-
-      - run: npm ci
-      - name: Code Climate Coverage Action
-        uses: paambaati/codeclimate-action@v2.7.5
-        env:
-          CC_TEST_REPORTER_ID: cb1c73236f756af10f423f2761ba1b33053d09094e1cd164f1a4fa7a7f81e0a2
-        with:
-          coverageCommand: npm run coverage
