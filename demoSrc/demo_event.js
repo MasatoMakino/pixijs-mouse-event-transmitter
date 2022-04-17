@@ -8,13 +8,11 @@ const onDomContentsLoaded = () => {
   const app = new Application({
     width: 640,
     height: 600,
-    backgroundColor: 0x666666
+    backgroundColor: 0x666666,
   });
   document.body.appendChild(app.view);
   const g = new Graphics();
-  g.beginFill(0xff0000)
-    .drawRect(0, 0, 32, 32)
-    .endFill();
+  g.beginFill(0xff0000).drawRect(0, 0, 32, 32).endFill();
   g.hitArea = new Rectangle(0, 0, 32, 32);
   g.position.set(32);
   g.interactive = true;
@@ -28,19 +26,19 @@ const onDomContentsLoaded = () => {
 
   const transmitter = new MouseEventTransmitter({
     transmitTarget: canvas,
-    app: app
+    app: app,
   });
 
-  canvas.addEventListener("mousedown", e => {
+  canvas.addEventListener("mousedown", (e) => {
     console.log(e.type);
   });
-  canvas.addEventListener("mouseup", e => {
+  canvas.addEventListener("mouseup", (e) => {
     console.log(e.type);
   });
-  canvas.addEventListener("mousemove", e => {
+  canvas.addEventListener("mousemove", (e) => {
     console.log(e.type);
   });
-  canvas.addEventListener("wheel", e => {
+  canvas.addEventListener("wheel", (e) => {
     console.log(e.type);
   });
 };
