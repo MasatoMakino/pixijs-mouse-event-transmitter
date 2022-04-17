@@ -21,7 +21,6 @@
     "gulptask-demo-page": "MasatoMakino/gulptask-demo-page",
     "gulptask-dev-server": "MasatoMakino/gulptask-dev-server",
     "gulptask-tsc": "MasatoMakino/gulptask-tsc",
-    "gulptask-tsdoc": "MasatoMakino/gulptask-tsdoc",
     "husky": "^6.0.0",
     "jest": "^27.0.4",
     "pixi.js-legacy": "^6.0.4",
@@ -40,7 +39,7 @@
     "start:dev": "gulp start_dev",
     "build": "gulp build",
     "build:clean": "gulp build_clean",
-    "checkout:docs": "git checkout HEAD ./docs/"
+    "typedocs": "npx typedoc --out ./docs/api src/index.ts"
   },
   "husky": {
     "hooks": {
