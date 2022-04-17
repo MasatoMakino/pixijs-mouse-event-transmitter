@@ -57,8 +57,7 @@ const initTestMember = () => {
 };
 
 describe("MouseEventTransmitter", () => {
-  const { app, canvas, transmitter, spyLog,  skipCounter } =
-    initTestMember();
+  const { app, canvas, transmitter, spyLog, skipCounter } = initTestMember();
 
   beforeEach(() => {
     const e = getMouseEvent("mouseup");
