@@ -1,5 +1,5 @@
 {
-  "name": "pixijs-mouse-event-transmitter",
+  "name": "@masatomakino/pixijs-mouse-event-transmitter",
   "version": "0.2.3",
   "description": "Transmit mouse events from pixi.js stage to other canvas.",
   "main": "./lib/index.js",
@@ -9,7 +9,10 @@
     "lib",
     "esm"
   ],
-  "repository": "https://MasatoMakino@github.com/MasatoMakino/pixijs-mouse-event-transmitter.git",
+  "repository": {
+    "type": "git",
+    "url": "git+https://MasatoMakino@github.com/MasatoMakino/pixijs-mouse-event-transmitter.git"
+  },
   "author": "MasatoMakino <unagiinu.g@gmail.com>",
   "license": "MIT",
   "devDependencies": {
@@ -45,5 +48,12 @@
     "server": "npx @masatomakino/gulptask-dev-server -b ./docs/demo",
     "typedocs": "npx typedoc --out ./docs/api src/index.ts"
   },
-  "dependencies": {}
+  "bugs": {
+    "url": "https://github.com/MasatoMakino/pixijs-mouse-event-transmitter/issues"
+  },
+  "homepage": "https://github.com/MasatoMakino/pixijs-mouse-event-transmitter#readme",
+  "directories": {
+    "doc": "docs",
+    "lib": "lib"
+  }
 }
