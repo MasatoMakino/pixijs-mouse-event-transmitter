@@ -1,6 +1,6 @@
 {
   "name": "@masatomakino/pixijs-mouse-event-transmitter",
-  "version": "0.2.3",
+  "version": "0.2.4",
   "description": "Transmit mouse events from pixi.js stage to other canvas.",
   "main": "./lib/index.js",
   "types": "./lib/index.d.ts",
