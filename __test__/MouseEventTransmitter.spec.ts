@@ -1,4 +1,4 @@
-import { getMouseEvent } from "fake-mouse-event";
+import { getMouseEvent } from "@masatomakino/fake-mouse-event";
 import { Application, Graphics, Rectangle } from "pixi.js-legacy";
 import { MouseEventTransmitter } from "../src";
 import { SkipCounter } from "./SkipCounter";
