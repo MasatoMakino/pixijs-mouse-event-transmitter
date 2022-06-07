@@ -26,7 +26,7 @@ npm install pixi.js --save-dev
 and
 
 ```bash
-npm install https://github.com/MasatoMakino/pixijs-mouse-event-transmitter.git --save-dev
+npm install @masatomakino/pixijs-mouse-event-transmitter --save-dev
 ```
 
 ### Import
@@ -36,7 +36,7 @@ pixijs-mouse-event-transmitter is composed of ES modules and TypeScript d.ts fil
 At first, import classes.
 
 ```js
-import { MouseEventTransmitter } from "pixijs-mouse-event-transmitter";
+import { MouseEventTransmitter } from "@masatomakino/pixijs-mouse-event-transmitter";
 
 const transmitter = new MouseEventTransmitter({
   transmitTarget: canvas, // transmitter target ( dom element )
