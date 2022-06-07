@@ -37,22 +37,12 @@
     "test": "jest",
     "coverage": "jest --coverage",
     "start:dev": "npm run server & npm run watch:tsc & npm run watch:demo",
-    "buildTS": "npx tsc --project tsconfig.cjs.json & tsc --project tsconfig.esm.json",
+    "buildTS": "npx tsc --project tsconfig.cjs.json & npx tsc --project tsconfig.esm.json",
     "watch:tsc": "tsc -W --incremental --project tsconfig.cjs.json & tsc -W --incremental --project tsconfig.esm.json",
     "demo": "npx gulptask-demo-page",
     "watch:demo": "npm run demo -- -W",
     "server": "npx gulptask-dev-server -b ./docs/demo",
     "typedocs": "npx typedoc --out ./docs/api src/index.ts"
   },
-  "husky": {
-    "hooks": {
-      "pre-commit": "pretty-quick --staged"
-    }
-  },
-  "dependencies": {},
-  "engines": {
-    "node": ">=12.0.0 <17",
-    "npm": "^6.0.0",
-    "yarn": "no support for yarn in this repo. Please use npm."
-  }
+  "dependencies": {}
 }
