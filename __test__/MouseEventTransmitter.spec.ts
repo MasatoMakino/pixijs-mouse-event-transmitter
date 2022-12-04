@@ -14,7 +14,7 @@ const initTestMember = () => {
     backgroundColor: 0x666666,
     forceCanvas: true,
   });
-  document.body.appendChild(app.view);
+  document.body.appendChild(app.view as HTMLCanvasElement);
 
   const size = 128;
   const g = new Graphics();
