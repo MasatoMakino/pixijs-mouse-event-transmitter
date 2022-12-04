@@ -1,5 +1,4 @@
-import { Application, Point, Ticker } from "pixi.js";
-import { InteractionManager } from "@pixi/interaction";
+import { Application, ICanvas, Ticker, EventBoundary } from "pixi.js";
 
 export interface MouseEventTransmitterOption {
   transmitTarget: HTMLElement;
@@ -7,8 +6,8 @@ export interface MouseEventTransmitterOption {
 }
 export class MouseEventTransmitter {
   private transmitTarget: HTMLElement;
-  private interactionManager: InteractionManager;
-  private canvas: HTMLCanvasElement;
+  private rootBoundary: EventBoundary;
+  private canvas: ICanvas;
   /**
    * 透過元のエレメントをドラッグ中か否か。
    * @private
@@ -28,7 +27,7 @@ export class MouseEventTransmitter {
 
   constructor(option: MouseEventTransmitterOption) {
     this.transmitTarget = option.transmitTarget;
-    this.interactionManager = option.app.renderer.plugins.interaction;
+    this.rootBoundary = option.app.renderer.events.rootBoundary;
     this.canvas = option.app.view;
 
     this.start();
@@ -140,6 +139,6 @@ export class MouseEventTransmitter {
    * @param e
    */
   private hitTestStage(e): boolean {
-    return !!this.interactionManager.hitTest(new Point(e.offsetX, e.offsetY));
+    return !!this.rootBoundary.hitTest(e.offsetX, e.offsetY);
   }
 }
