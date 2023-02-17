@@ -41,7 +41,7 @@
     "test": "jest",
     "coverage": "jest --coverage",
     "start:dev": "npm run server & npm run watch:tsc & npm run watch:demo",
-    "buildTS": "npx tsc --project tsconfig.cjs.json & npx tsc --project tsconfig.esm.json",
+    "buildTS": "tsc --project tsconfig.cjs.json & tsc --project tsconfig.esm.json",
     "watch:tsc": "tsc -W --incremental --project tsconfig.cjs.json & tsc -W --incremental --project tsconfig.esm.json",
     "demo": "npx @masatomakino/gulptask-demo-page",
     "watch:demo": "npm run demo -- -W",
