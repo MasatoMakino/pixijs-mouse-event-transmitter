@@ -13,8 +13,6 @@ jobs:
     if: ${{ github.event.workflow_run.conclusion == 'success' && github.event.workflow_run.event == 'push' && github.event.workflow_run.head_branch == 'main' }}
     steps:
       - uses: actions/checkout@v3
-      - name: install apt packages for headless-gl
-        run: sudo apt-get install libxi-dev xvfb libgl1-mesa-dev
       - name: Use Node.js
         uses: actions/setup-node@v3
         with:
@@ -23,7 +21,7 @@ jobs:
       - run: npm ci
       - run: npm run buildTS
       - name: Code Climate Coverage Action
-        uses: paambaati/codeclimate-action@v2.7.5
+        uses: paambaati/codeclimate-action@v3.2.0
         env:
           CC_TEST_REPORTER_ID: cb1c73236f756af10f423f2761ba1b33053d09094e1cd164f1a4fa7a7f81e0a2
         with:

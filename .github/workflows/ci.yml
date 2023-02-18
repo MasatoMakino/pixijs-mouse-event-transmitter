@@ -6,33 +6,17 @@ name: CI
 on:
   push:
     branches: [main]
-    paths:
-      - "src/**"
-      - "__test__/**"
-      - ".github/**"
-      - "package.json"
-      - "tsconfig*.json"
   pull_request:
     branches: [main]
-    paths:
-      - "src/**"
-      - "__test__/**"
-      - ".github/**"
-      - "package.json"
-      - "tsconfig*.json"
 
 jobs:
   jest:
     runs-on: ubuntu-latest
-
     strategy:
       matrix:
         node-version: [16.x, 18.x]
-
     steps:
       - uses: actions/checkout@v3
-      - name: install apt packages for headless-gl
-        run: sudo apt-get install libxi-dev xvfb libgl1-mesa-dev
       - name: Use Node.js ${{ matrix.node-version }}
         uses: actions/setup-node@v3
         with:
