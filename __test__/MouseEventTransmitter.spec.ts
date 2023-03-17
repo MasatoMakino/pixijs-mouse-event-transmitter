@@ -21,7 +21,7 @@ const initTestMember = () => {
   g.beginFill(0xff0000).drawRect(0, 0, size, size).endFill();
   g.hitArea = new Rectangle(0, 0, size, size);
   g.position.set(W / 2, H / 2);
-  g.interactive = true;
+  g.eventMode = "static";
   app.stage.addChild(g);
 
   const canvas = document.createElement("canvas");
