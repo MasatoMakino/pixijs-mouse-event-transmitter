@@ -139,6 +139,9 @@ export class MouseEventTransmitter {
    * @param e
    */
   private hitTestStage(e): boolean {
-    return !!this.rootBoundary.hitTest(e.offsetX, e.offsetY);
+    if (this.rootBoundary.rootTarget) {
+      return !!this.rootBoundary.hitTest(e.offsetX, e.offsetY);
+    }
+    return false;
   }
 }
