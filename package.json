@@ -43,6 +43,7 @@
     "prepare": "husky install",
     "test": "jest",
     "coverage": "jest --coverage",
+    "preversion": "git checkout main && git pull && npm run test",
     "start:dev": "npm run server & npm run watch:tsc & npm run watch:demo",
     "buildTS": "tsc --project tsconfig.cjs.json & tsc --project tsconfig.esm.json",
     "watch:tsc": "tsc -W --incremental --project tsconfig.cjs.json & tsc -W --incremental --project tsconfig.esm.json",
