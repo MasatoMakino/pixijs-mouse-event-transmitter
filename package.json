@@ -36,6 +36,9 @@
   "peerDependencies": {
     "pixi.js": "^7.2.0"
   },
+  "overrides": {
+    "@types/css-font-loading-module": "^0.0.8"
+  },
   "scripts": {
     "prepare": "husky install",
     "test": "jest",
