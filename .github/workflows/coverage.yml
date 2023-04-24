@@ -21,7 +21,7 @@ jobs:
       - run: npm ci
       - run: npm run buildTS
       - name: Code Climate Coverage Action
-        uses: paambaati/codeclimate-action@v3.2.0
+        uses: paambaati/codeclimate-action@v4.0.0
         env:
           CC_TEST_REPORTER_ID: cb1c73236f756af10f423f2761ba1b33053d09094e1cd164f1a4fa7a7f81e0a2
         with:
