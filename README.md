@@ -13,6 +13,10 @@
 
 [Demo Page](https://masatomakino.github.io/pixijs-mouse-event-transmitter/demo/)
 
+## API
+
+[API document](https://masatomakino.github.io/pixijs-mouse-event-transmitter/api/)
+
 ## Getting Started
 
 ### Install
