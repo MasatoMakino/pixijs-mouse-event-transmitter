@@ -15,7 +15,7 @@ const onDomContentsLoaded = () => {
   g.beginFill(0xff0000).drawRect(0, 0, 32, 32).endFill();
   g.hitArea = new Rectangle(0, 0, 32, 32);
   g.position.set(32);
-  g.interactive = true;
+  g.eventMode = "static";
 
   app.stage.addChild(g);
 
