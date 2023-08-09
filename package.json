@@ -17,7 +17,7 @@
   "license": "MIT",
   "devDependencies": {
     "@masatomakino/fake-mouse-event": "^0.0.11",
-    "@masatomakino/gulptask-demo-page": "^0.6.1",
+    "@masatomakino/gulptask-demo-page": "^0.7.0",
     "@swc/core": "^1.3.40",
     "@swc/jest": "^0.2.24",
     "@types/jest": "^29.5.0",
