@@ -30,7 +30,7 @@
     "pixi.js-legacy": "^7.2.0",
     "prettier": "^3.0.1",
     "ts-node": "^10.9.1",
-    "typedoc": "^0.24.2",
+    "typedoc": "^0.25.0",
     "typescript": "^5.0.4"
   },
   "peerDependencies": {
