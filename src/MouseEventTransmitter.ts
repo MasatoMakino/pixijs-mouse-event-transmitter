@@ -1,4 +1,4 @@
-import { Application, ICanvas, Ticker, EventBoundary } from "pixi.js";
+import { Application, Ticker, EventBoundary } from "pixi.js";
 
 export interface MouseEventTransmitterOption {
   transmitTarget: HTMLElement;
@@ -7,14 +7,14 @@ export interface MouseEventTransmitterOption {
 export class MouseEventTransmitter {
   private transmitTarget: HTMLElement;
   private rootBoundary: EventBoundary;
-  private canvas: ICanvas;
+  private canvas: HTMLCanvasElement;
   /**
    * 透過元のエレメントをドラッグ中か否か。
    * @private
    */
   private isDragging: boolean = false;
   private hasStartedDraggingFromTransmitTarget: boolean = false;
-  private isListen: boolean;
+  private isListen: boolean = false;
   private isThrottling: boolean = false;
   /**
    * このフレーム数毎にmouseMoveのヒット処理が行われる。
@@ -28,7 +28,7 @@ export class MouseEventTransmitter {
   constructor(option: MouseEventTransmitterOption) {
     this.transmitTarget = option.transmitTarget;
     this.rootBoundary = option.app.renderer.events.rootBoundary;
-    this.canvas = option.app.view;
+    this.canvas = option.app.view as HTMLCanvasElement;
 
     this.start();
 
@@ -65,7 +65,7 @@ export class MouseEventTransmitter {
    * 下層のDOMからドラッグが開始された場合、stage上にポインタがかかってもイベントの伝播を継続する。
    * @param e
    */
-  private onMouseMove = (e): void => {
+  private onMouseMove = (e: MouseEvent): void => {
     //連続実行の絞り込み中は処理を中断。
     if (this.isThrottling) {
       return;
@@ -85,7 +85,7 @@ export class MouseEventTransmitter {
     this.onMouseMoveNonDragging(e);
   };
 
-  private onMouseMoveNonDragging(e) {
+  private onMouseMoveNonDragging(e: MouseEvent) {
     if (this.mouseMoveCounter !== 0) {
       return;
     }
@@ -98,7 +98,7 @@ export class MouseEventTransmitter {
    * stageにヒットした場合は伝播が止まる。
    * @param e
    */
-  private onMouseDown = (e): void => {
+  private onMouseDown = (e: MouseEvent): void => {
     const isHit = this.hitTestStage(e);
     this.isDragging = true;
     this.hasStartedDraggingFromTransmitTarget = !isHit;
@@ -114,7 +114,7 @@ export class MouseEventTransmitter {
    * この二つのイベントはstageへのヒットにかかわらず、必ず伝播される。
    * @param e
    */
-  private onMouseUpLeave = (e): void => {
+  private onMouseUpLeave = (e: MouseEvent): void => {
     this.dispatchClone(e);
     this.isDragging = false;
     this.hasStartedDraggingFromTransmitTarget = false;
@@ -124,12 +124,13 @@ export class MouseEventTransmitter {
    * stageにヒットした場合は伝播が止まる。
    * @param e
    */
-  private onWheelEvent = (e): void => {
+  private onWheelEvent = (e: WheelEvent): void => {
     if (this.hitTestStage(e)) return;
     this.dispatchClone(e);
   };
 
-  private dispatchClone(e) {
+  private dispatchClone(e: MouseEvent | WheelEvent): void {
+    // @ts-ignore
     const clone = new e.constructor(e.type, e);
     this.transmitTarget.dispatchEvent(clone);
   }
@@ -138,7 +139,7 @@ export class MouseEventTransmitter {
    * ステージに対する当たり判定を行う。
    * @param e
    */
-  private hitTestStage(e): boolean {
+  private hitTestStage(e: MouseEvent): boolean {
     if (this.rootBoundary.rootTarget) {
       return !!this.rootBoundary.hitTest(e.offsetX, e.offsetY);
     }
