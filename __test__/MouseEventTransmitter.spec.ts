@@ -1,7 +1,7 @@
 import { getMouseEvent } from "@masatomakino/fake-mouse-event";
 import { FakeMouseEventInit } from "@masatomakino/fake-mouse-event/bin/FakeMouseEventInit";
 import { generateStage } from "./StageGenerator";
-import { MouseEventTransmitter } from "../src";
+
 describe("MouseEventTransmitter", () => {
   const { app, canvas, transmitter, spyLog, skipCounter } = generateStage();
 
@@ -28,7 +28,7 @@ describe("MouseEventTransmitter", () => {
   const dispatchEvent = (
     type: string,
     option?: FakeMouseEventInit,
-    isListen?: boolean
+    isListen?: boolean,
   ) => {
     if (!option) {
       option = { x: 100, y: 100, offsetX: 100, offsetY: 100 };
@@ -65,7 +65,7 @@ describe("MouseEventTransmitter", () => {
     dispatchEvent(
       "mousedown",
       { offsetX: app.view.width / 2, offsetY: app.view.height / 2 },
-      false
+      false,
     );
   });
   test("mouseup", () => {
@@ -83,7 +83,7 @@ describe("MouseEventTransmitter", () => {
     dispatchEvent(
       "wheel",
       { offsetX: app.view.width / 2, offsetY: app.view.height / 2 },
-      false
+      false,
     );
   });
 
@@ -108,26 +108,26 @@ describe("MouseEventTransmitter", () => {
     dispatchEvent(
       "mousemove",
       { offsetX: app.view.width / 2, offsetY: app.view.height / 2 },
-      false
+      false,
     );
     dispatchEvent(
       "mousemove",
       { offsetX: app.view.width / 2, offsetY: app.view.height / 2 },
-      false
+      false,
     );
 
     skipCounter.update();
     dispatchEvent(
       "mousemove",
       { offsetX: app.view.width / 2, offsetY: app.view.height / 2 },
-      false
+      false,
     );
 
     skipCounter.reset();
     dispatchEvent(
       "mousemove",
       { offsetX: app.view.width / 2, offsetY: app.view.height / 2 },
-      false
+      false,
     );
   });
 
@@ -154,7 +154,7 @@ describe("MouseEventTransmitter", () => {
     dispatchEvent(
       "mousedown",
       { offsetX: app.view.width / 2, offsetY: app.view.height / 2 },
-      false
+      false,
     );
     dispatchEvent("mousemove", undefined, false);
     skipCounter.update();
