@@ -1,1 +1,1 @@
-export * from "./MouseEventTransmitter";
+export * from "./MouseEventTransmitter.js";
