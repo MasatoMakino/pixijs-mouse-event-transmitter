@@ -1,5 +1,5 @@
 import { Ticker } from "pixi.js";
-import { MouseEventTransmitter } from "../src";
+import { MouseEventTransmitter } from "../src/index.js";
 
 export class SkipCounter {
   private _count: number = 0;

@@ -2,11 +2,17 @@
   "name": "@masatomakino/pixijs-mouse-event-transmitter",
   "version": "0.4.2",
   "description": "Transmit mouse events from pixi.js stage to other canvas.",
-  "main": "./lib/index.js",
-  "types": "./lib/index.d.ts",
-  "module": "./esm/index.js",
+  "type": "module",
+  "exports": {
+    ".": {
+      "import": {
+        "types": "./esm/index.d.ts",
+        "default": "./esm/index.js"
+      }
+    }
+  },
+  "types": "./esm/index.d.ts",
   "files": [
-    "lib",
     "esm"
   ],
   "repository": {
@@ -28,7 +34,6 @@
     "pixi.js-legacy": "^7.2.0",
     "prettier": "^3.0.1",
     "ts-jest": "^29.1.1",
-    "ts-node": "^10.9.1",
     "typedoc": "^0.25.0",
     "typescript": "^5.0.4"
   },
@@ -46,9 +51,9 @@
     "preversion": "git checkout main && git pull && npm ci && npm run test",
     "postversion": "git add package.json package-lock.json && git checkout -b version/$(git describe --tags --abbrev=0)",
     "start:dev": "npm run server & npm run watch:tsc & npm run watch:demo",
-    "buildTS": "tsc --project tsconfig.cjs.json & tsc --project tsconfig.esm.json",
-    "watch:tsc": "tsc -W --incremental --project tsconfig.cjs.json & tsc -W --incremental --project tsconfig.esm.json",
-    "demo": "npx @masatomakino/gulptask-demo-page",
+    "buildTS": "tsc",
+    "watch:tsc": "tsc -W --incremental",
+    "demo": "npx @masatomakino/gulptask-demo-page --compileModule es2020",
     "watch:demo": "npm run demo -- -W",
     "server": "browser-sync ./docs/demo -w",
     "typedocs": "npx typedoc --out ./docs/api src/index.ts"

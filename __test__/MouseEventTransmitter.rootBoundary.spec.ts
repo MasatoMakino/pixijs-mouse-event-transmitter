@@ -1,5 +1,5 @@
 import { getMouseEvent } from "@masatomakino/fake-mouse-event";
-import { generateStage } from "./StageGenerator";
+import { generateStage } from "./StageGenerator.js";
 
 describe("MouseEventTransmitter", () => {
   const { app, canvas, transmitter, spyLog, skipCounter } = generateStage();
