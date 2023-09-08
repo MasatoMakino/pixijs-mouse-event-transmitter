@@ -1,6 +1,6 @@
-import { SkipCounter } from "./SkipCounter";
+import { SkipCounter } from "./SkipCounter.js";
 import { Application, Graphics, Rectangle } from "pixi.js-legacy";
-import { MouseEventTransmitter } from "../src";
+import { MouseEventTransmitter } from "../src/index.js";
 
 export const generateStage = () => {
   const spyLog = jest.spyOn(console, "log").mockImplementation((x) => x);
