@@ -2,7 +2,7 @@
   "compilerOptions": {
     "target": "ES2021",
     "module": "node16",
-    "lib": ["ES2021"],
+    "lib": ["ES2021", "DOM"],
     "outDir": "./esm",
     "moduleResolution": "node16",
     "declaration": true,
