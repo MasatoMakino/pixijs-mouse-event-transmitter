@@ -1,7 +1,8 @@
 import {
-  getMouseEvent,
   FakeMouseEventInit,
+  getMouseEvent,
 } from "@masatomakino/fake-mouse-event";
+import { beforeEach, describe, expect, test } from "vitest";
 import { generateStage } from "./StageGenerator.js";
 
 describe("MouseEventTransmitter", () => {
