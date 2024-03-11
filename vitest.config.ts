@@ -6,6 +6,7 @@ export default defineConfig({
       enabled: true,
       name: "chrome",
     },
+    pool: "forks",
     coverage: {
       provider: "istanbul",
       reporter: ["text", "lcov"],

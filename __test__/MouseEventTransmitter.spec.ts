@@ -95,20 +95,40 @@ describe("MouseEventTransmitter", async () => {
   });
 
   test("pointermove", () => {
-    dispatchEvent("pointermove");
+    dispatchEvent("pointermove", {
+      offsetX: 0,
+      offsetY: 0,
+    });
     /**
      * 二度目のマウスムーブはスロットリングされる
      */
-    dispatchEvent("pointermove", undefined, false);
+    dispatchEvent(
+      "pointermove",
+      {
+        offsetX: 0,
+        offsetY: 0,
+      },
+      false,
+    );
 
     /**
      * skipMouseMovePerFrame分の更新が進むまで、mousemoveは無視し続ける
      */
     skipCounter.update();
-    dispatchEvent("pointermove", undefined, false);
+    dispatchEvent(
+      "pointermove",
+      {
+        offsetX: 0,
+        offsetY: 0,
+      },
+      false,
+    );
 
     skipCounter.reset();
-    dispatchEvent("pointermove");
+    dispatchEvent("pointermove", {
+      offsetX: 0,
+      offsetY: 0,
+    });
   });
 
   test("pointermove on interactive object", () => {
