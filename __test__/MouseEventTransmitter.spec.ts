@@ -160,7 +160,7 @@ describe("MouseEventTransmitter", async () => {
      */
     dispatchEvent(
       "pointerdown",
-      { offsetX: app.view.width / 2, offsetY: app.view.height / 2 },
+      { offsetX: app.canvas.width / 2, offsetY: app.canvas.height / 2 },
       false,
     );
     dispatchEvent("pointermove", undefined, false);
