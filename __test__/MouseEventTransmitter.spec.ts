@@ -5,12 +5,13 @@ import {
 import { beforeEach, describe, expect, test } from "vitest";
 import { generateStage } from "./StageGenerator.js";
 
-describe("MouseEventTransmitter", () => {
-  const { app, canvas, transmitter, spyLog, skipCounter } = generateStage();
+describe("MouseEventTransmitter", async () => {
+  const { app, canvas, transmitter, spyLog, skipCounter } =
+    await generateStage();
 
   beforeEach(() => {
     const e = getMouseEvent("pointerup");
-    app.view.dispatchEvent(e);
+    app.canvas.dispatchEvent(e);
     transmitter.start();
     skipCounter.reset();
     spyLog.mockClear();
@@ -38,7 +39,7 @@ describe("MouseEventTransmitter", () => {
     }
     isListen ??= true;
     const e = getMouseEvent(type, option);
-    app.view.dispatchEvent(e);
+    app.canvas.dispatchEvent(e);
     if (isListen) {
       expect(spyLog).toBeCalledWith(expect.objectContaining(option));
     } else {
@@ -66,12 +67,12 @@ describe("MouseEventTransmitter", () => {
   test("pointerdown", () => {
     dispatchEvent("pointerdown");
     /**
-     * pointerdownイベントは、mouseeventと異なりupの前にdownが連続しても発効する。
+     * pointerdownイベントは、chrome環境では連続して発効しない。
      */
     dispatchEvent(
       "pointerdown",
-      { offsetX: app.view.width / 2, offsetY: app.view.height / 2 },
-      true,
+      { offsetX: app.canvas.width / 2, offsetY: app.canvas.height / 2 },
+      false,
     );
   });
   test("pointerup", () => {
@@ -80,15 +81,15 @@ describe("MouseEventTransmitter", () => {
      * pointerupはstage上のオブジェクトを無視する。
      */
     dispatchEvent("pointerup", {
-      offsetX: app.view.width / 2,
-      offsetY: app.view.height / 2,
+      offsetX: app.canvas.width / 2,
+      offsetY: app.canvas.height / 2,
     });
   });
   test("wheel", () => {
     dispatchEvent("wheel");
     dispatchEvent(
       "wheel",
-      { offsetX: app.view.width / 2, offsetY: app.view.height / 2 },
+      { offsetX: app.canvas.width / 2, offsetY: app.canvas.height / 2 },
       false,
     );
   });
@@ -113,26 +114,26 @@ describe("MouseEventTransmitter", () => {
   test("pointermove on interactive object", () => {
     dispatchEvent(
       "pointermove",
-      { offsetX: app.view.width / 2, offsetY: app.view.height / 2 },
+      { offsetX: app.canvas.width / 2, offsetY: app.canvas.height / 2 },
       false,
     );
     dispatchEvent(
       "pointermove",
-      { offsetX: app.view.width / 2, offsetY: app.view.height / 2 },
+      { offsetX: app.canvas.width / 2, offsetY: app.canvas.height / 2 },
       false,
     );
 
     skipCounter.update();
     dispatchEvent(
       "pointermove",
-      { offsetX: app.view.width / 2, offsetY: app.view.height / 2 },
+      { offsetX: app.canvas.width / 2, offsetY: app.canvas.height / 2 },
       false,
     );
 
     skipCounter.reset();
     dispatchEvent(
       "pointermove",
-      { offsetX: app.view.width / 2, offsetY: app.view.height / 2 },
+      { offsetX: app.canvas.width / 2, offsetY: app.canvas.height / 2 },
       false,
     );
   });
