@@ -47,7 +47,7 @@ const transmitter = new MouseEventTransmitter({
   app: app, // app instance of pixi.js
 });
 
-canvas.addEventListener("mousemove", (e) => {
+canvas.addEventListener("pointermove", (e) => {
   console.log(e);
 });
 ```
