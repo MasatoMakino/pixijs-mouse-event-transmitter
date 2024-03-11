@@ -6,14 +6,12 @@ import { beforeEach, describe, expect, test } from "vitest";
 import { generateStage } from "./StageGenerator.js";
 
 describe("MouseEventTransmitter", async () => {
-  const { app, canvas, transmitter, spyLog, skipCounter } =
-    await generateStage();
+  const { app, transmitter, spyLog } = await generateStage();
 
   beforeEach(() => {
     const e = getMouseEvent("pointerup");
     app.canvas.dispatchEvent(e);
     transmitter.start();
-    skipCounter.reset();
     spyLog.mockClear();
 
     app.render();
@@ -118,14 +116,12 @@ describe("MouseEventTransmitter", async () => {
       false,
     );
 
-    skipCounter.update();
     dispatchPointerEventAndTest(
       "pointermove",
       { offsetX: app.canvas.width / 2, offsetY: app.canvas.height / 2 },
       false,
     );
 
-    skipCounter.reset();
     dispatchPointerEventAndTest(
       "pointermove",
       { offsetX: app.canvas.width / 2, offsetY: app.canvas.height / 2 },
@@ -137,12 +133,6 @@ describe("MouseEventTransmitter", async () => {
     dispatchPointerEventAndTest("pointerdown");
     dispatchPointerEventAndTest("pointermove");
     dispatchPointerEventAndTest("pointermove");
-
-    /**
-     * ドラッグ中は、1フレーム分updateされれればpointermoveが実行される。
-     * skipMouseMovePerFrameの値は無視する。
-     */
-    skipCounter.update();
     dispatchPointerEventAndTest("pointermove");
   });
 
@@ -156,9 +146,7 @@ describe("MouseEventTransmitter", async () => {
       false,
     );
     dispatchPointerEventAndTest("pointermove", undefined, false);
-    skipCounter.update();
     dispatchPointerEventAndTest("pointermove", undefined, false);
-    skipCounter.reset();
     dispatchPointerEventAndTest("pointermove", undefined, false);
 
     /**

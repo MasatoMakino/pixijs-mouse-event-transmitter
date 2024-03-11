@@ -1,7 +1,6 @@
 import { Application, Graphics, Rectangle } from "pixi.js";
 import { vi } from "vitest";
 import { MouseEventTransmitter } from "../src/index.js";
-import { SkipCounter } from "./SkipCounter.js";
 
 export const generateStage = async () => {
   const spyLog = vi.spyOn(console, "log").mockImplementation((x) => x);
@@ -48,12 +47,10 @@ export const generateStage = async () => {
     app: app,
   });
 
-  const skipCounter = new SkipCounter(transmitter);
   return {
     app,
     canvas,
     transmitter,
     spyLog,
-    skipCounter,
   };
 };

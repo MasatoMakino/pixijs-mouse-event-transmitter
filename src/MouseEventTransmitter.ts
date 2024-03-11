@@ -15,14 +15,6 @@ export class MouseEventTransmitter {
   private isDragging: boolean = false;
   private hasStartedDraggingFromTransmitTarget: boolean = false;
   private isListen: boolean = false;
-  /**
-   * このフレーム数毎にmouseMoveのヒット処理が行われる。
-   * 例えば2を指定した場合は、1フレームスキップ、1フレーム処理...の順になる。
-   * 1を指定した場合は毎フレーム処理が行われる。
-   * 1以上の整数であること。
-   */
-  public skipMouseMovePerFrame: number = 2;
-  private mouseMoveCounter: number = 0;
 
   constructor(option: MouseEventTransmitterOption) {
     this.transmitTarget = option.transmitTarget;
