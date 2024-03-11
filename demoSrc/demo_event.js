@@ -30,13 +30,13 @@ const onDomContentsLoaded = () => {
     app: app,
   });
 
-  canvas.addEventListener("mousedown", (e) => {
+  canvas.addEventListener("pointerdown", (e) => {
     console.log(e.type);
   });
-  canvas.addEventListener("mouseup", (e) => {
+  canvas.addEventListener("pointerup", (e) => {
     console.log(e.type);
   });
-  canvas.addEventListener("mousemove", (e) => {
+  canvas.addEventListener("pointermove", (e) => {
     console.log(e.type);
   });
   canvas.addEventListener("wheel", (e) => {

@@ -28,13 +28,13 @@ export const generateStage = () => {
   canvas.width = 800;
   canvas.height = 600;
   document.body.appendChild(canvas);
-  canvas.addEventListener("mousedown", (e) => {
+  canvas.addEventListener("pointerdown", (e) => {
     console.log(e);
   });
-  canvas.addEventListener("mouseup", (e) => {
+  canvas.addEventListener("pointerup", (e) => {
     console.log(e);
   });
-  canvas.addEventListener("mousemove", (e) => {
+  canvas.addEventListener("pointermove", (e) => {
     console.log(e);
   });
   canvas.addEventListener("wheel", (e) => {

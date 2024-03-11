@@ -41,20 +41,20 @@ export class MouseEventTransmitter {
 
   public start(): void {
     if (this.isListen) return;
-    this.canvas.addEventListener("mousemove", this.onMouseMove, false);
-    this.canvas.addEventListener("mousedown", this.onMouseDown, false);
-    this.canvas.addEventListener("mouseup", this.onMouseUpLeave, false);
-    this.canvas.addEventListener("mouseleave", this.onMouseUpLeave, false);
+    this.canvas.addEventListener("pointermove", this.onMouseMove, false);
+    this.canvas.addEventListener("pointerdown", this.onMouseDown, false);
+    this.canvas.addEventListener("pointerup", this.onMouseUpLeave, false);
+    this.canvas.addEventListener("pointerleave", this.onMouseUpLeave, false);
     this.canvas.addEventListener("wheel", this.onWheelEvent, false);
     this.isListen = true;
   }
 
   public stop(): void {
     if (!this.isListen) return;
-    this.canvas.removeEventListener("mousemove", this.onMouseMove);
-    this.canvas.removeEventListener("mousedown", this.onMouseDown);
-    this.canvas.removeEventListener("mouseup", this.onMouseUpLeave);
-    this.canvas.removeEventListener("mouseleave", this.onMouseUpLeave);
+    this.canvas.removeEventListener("pointermove", this.onMouseMove);
+    this.canvas.removeEventListener("pointerdown", this.onMouseDown);
+    this.canvas.removeEventListener("pointerup", this.onMouseUpLeave);
+    this.canvas.removeEventListener("pointerleave", this.onMouseUpLeave);
     this.canvas.removeEventListener("wheel", this.onWheelEvent);
     this.isListen = false;
   }
