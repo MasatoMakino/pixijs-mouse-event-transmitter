@@ -3,12 +3,10 @@ import { beforeEach, describe, expect, test } from "vitest";
 import { generateStage } from "./StageGenerator.js";
 
 describe("MouseEventTransmitter", async () => {
-  const { app, canvas, transmitter, spyLog, skipCounter } =
-    await generateStage();
+  const { app, transmitter, spyLog } = await generateStage();
 
   beforeEach(() => {
     transmitter.start();
-    skipCounter.reset();
     spyLog.mockClear();
   });
 
