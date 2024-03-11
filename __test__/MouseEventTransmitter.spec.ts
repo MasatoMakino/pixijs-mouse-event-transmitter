@@ -9,7 +9,7 @@ describe("MouseEventTransmitter", () => {
   const { app, canvas, transmitter, spyLog, skipCounter } = generateStage();
 
   beforeEach(() => {
-    const e = getMouseEvent("mouseup");
+    const e = getMouseEvent("pointerup");
     app.view.dispatchEvent(e);
     transmitter.start();
     skipCounter.reset();
@@ -50,33 +50,36 @@ describe("MouseEventTransmitter", () => {
 
   test("start and stop", () => {
     transmitter.start();
-    dispatchEvent("mousedown");
+    dispatchEvent("pointerdown");
     transmitter.start();
-    dispatchEvent("mousedown");
+    dispatchEvent("pointerdown");
 
     transmitter.stop();
-    dispatchEvent("mousedown", undefined, false);
+    dispatchEvent("pointerdown", undefined, false);
     transmitter.stop();
-    dispatchEvent("mousedown", undefined, false);
+    dispatchEvent("pointerdown", undefined, false);
 
     transmitter.start();
-    dispatchEvent("mousedown");
+    dispatchEvent("pointerdown");
   });
 
-  test("mousedown", () => {
-    dispatchEvent("mousedown");
+  test("pointerdown", () => {
+    dispatchEvent("pointerdown");
+    /**
+     * pointerdownイベントは、mouseeventと異なりupの前にdownが連続しても発効する。
+     */
     dispatchEvent(
-      "mousedown",
+      "pointerdown",
       { offsetX: app.view.width / 2, offsetY: app.view.height / 2 },
-      false,
+      true,
     );
   });
-  test("mouseup", () => {
-    dispatchEvent("mouseup");
+  test("pointerup", () => {
+    dispatchEvent("pointerup");
     /**
-     * mouseupはstage上のオブジェクトを無視する。
+     * pointerupはstage上のオブジェクトを無視する。
      */
-    dispatchEvent("mouseup", {
+    dispatchEvent("pointerup", {
       offsetX: app.view.width / 2,
       offsetY: app.view.height / 2,
     });
@@ -90,64 +93,64 @@ describe("MouseEventTransmitter", () => {
     );
   });
 
-  test("mousemove", () => {
-    dispatchEvent("mousemove");
+  test("pointermove", () => {
+    dispatchEvent("pointermove");
     /**
      * 二度目のマウスムーブはスロットリングされる
      */
-    dispatchEvent("mousemove", undefined, false);
+    dispatchEvent("pointermove", undefined, false);
 
     /**
      * skipMouseMovePerFrame分の更新が進むまで、mousemoveは無視し続ける
      */
     skipCounter.update();
-    dispatchEvent("mousemove", undefined, false);
+    dispatchEvent("pointermove", undefined, false);
 
     skipCounter.reset();
-    dispatchEvent("mousemove");
+    dispatchEvent("pointermove");
   });
 
-  test("mousemove on interactive object", () => {
+  test("pointermove on interactive object", () => {
     dispatchEvent(
-      "mousemove",
+      "pointermove",
       { offsetX: app.view.width / 2, offsetY: app.view.height / 2 },
       false,
     );
     dispatchEvent(
-      "mousemove",
+      "pointermove",
       { offsetX: app.view.width / 2, offsetY: app.view.height / 2 },
       false,
     );
 
     skipCounter.update();
     dispatchEvent(
-      "mousemove",
+      "pointermove",
       { offsetX: app.view.width / 2, offsetY: app.view.height / 2 },
       false,
     );
 
     skipCounter.reset();
     dispatchEvent(
-      "mousemove",
+      "pointermove",
       { offsetX: app.view.width / 2, offsetY: app.view.height / 2 },
       false,
     );
   });
 
   test("drag", () => {
-    dispatchEvent("mousedown");
-    dispatchEvent("mousemove");
+    dispatchEvent("pointerdown");
+    dispatchEvent("pointermove");
     /**
      * 二度目のマウスムーブはスロットリングされる
      */
-    dispatchEvent("mousemove", undefined, false);
+    dispatchEvent("pointermove", undefined, false);
 
     /**
-     * ドラッグ中は、1フレーム分updateされれればmousemoveが実行される。
+     * ドラッグ中は、1フレーム分updateされれればpointermoveが実行される。
      * skipMouseMovePerFrameの値は無視する。
      */
     skipCounter.update();
-    dispatchEvent("mousemove");
+    dispatchEvent("pointermove");
   });
 
   test("drag : start from interactive object", () => {
@@ -155,22 +158,22 @@ describe("MouseEventTransmitter", () => {
      * stage上のインタラクティブオブジェクトからドラッグを開始すると、イベントをすべて無視する。
      */
     dispatchEvent(
-      "mousedown",
+      "pointerdown",
       { offsetX: app.view.width / 2, offsetY: app.view.height / 2 },
       false,
     );
-    dispatchEvent("mousemove", undefined, false);
+    dispatchEvent("pointermove", undefined, false);
     skipCounter.update();
-    dispatchEvent("mousemove", undefined, false);
+    dispatchEvent("pointermove", undefined, false);
     skipCounter.reset();
-    dispatchEvent("mousemove", undefined, false);
+    dispatchEvent("pointermove", undefined, false);
 
     /**
      * マウスアップしてドラッグを再開すると、反応する
      */
-    dispatchEvent("mouseup");
-    dispatchEvent("mousedown");
-    dispatchEvent("mousemove");
-    dispatchEvent("mousemove", undefined, false);
+    dispatchEvent("pointerup");
+    dispatchEvent("pointerdown");
+    dispatchEvent("pointermove");
+    dispatchEvent("pointermove", undefined, false);
   });
 });
