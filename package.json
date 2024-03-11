@@ -35,17 +35,13 @@
     "husky": "^9.0.10",
     "jsdom": "^24.0.0",
     "lint-staged": "^15.0.2",
-    "pixi.js-legacy": "^7.4.0",
     "prettier": "^3.0.1",
     "typedoc": "^0.25.0",
     "typescript": "^5.0.4",
     "vitest": "^1.2.2"
   },
   "peerDependencies": {
-    "pixi.js": "^7.2.0"
-  },
-  "overrides": {
-    "@types/css-font-loading-module": "^0.0.8"
+    "pixi.js": "^8.0.0"
   },
   "scripts": {
     "prepare": "husky",
