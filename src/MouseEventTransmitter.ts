@@ -15,7 +15,6 @@ export class MouseEventTransmitter {
   private isDragging: boolean = false;
   private hasStartedDraggingFromTransmitTarget: boolean = false;
   private isListen: boolean = false;
-  private isThrottling: boolean = false;
   /**
    * このフレーム数毎にmouseMoveのヒット処理が行われる。
    * 例えば2を指定した場合は、1フレームスキップ、1フレーム処理...の順になる。
@@ -31,12 +30,6 @@ export class MouseEventTransmitter {
     this.canvas = option.app.canvas as HTMLCanvasElement;
 
     this.start();
-
-    Ticker.shared.add(() => {
-      this.mouseMoveCounter++;
-      this.mouseMoveCounter %= this.skipMouseMovePerFrame;
-      this.isThrottling = false;
-    });
   }
 
   public start(): void {
@@ -66,30 +59,18 @@ export class MouseEventTransmitter {
    * @param e
    */
   private onMouseMove = (e: MouseEvent): void => {
-    //連続実行の絞り込み中は処理を中断。
-    if (this.isThrottling) {
-      return;
-    }
-
     if (this.isDragging && !this.hasStartedDraggingFromTransmitTarget) {
       return;
     }
-    this.isThrottling = true;
 
     if (this.hasStartedDraggingFromTransmitTarget) {
       this.dispatchClone(e);
       return;
     }
-
-    //ドラッグ中でない場合は、間引き処理をしながらイベントを上げる
     this.onMouseMoveNonDragging(e);
   };
 
   private onMouseMoveNonDragging(e: MouseEvent) {
-    if (this.mouseMoveCounter !== 0) {
-      return;
-    }
-
     if (this.hitTestStage(e)) return;
     this.dispatchClone(e);
   }
