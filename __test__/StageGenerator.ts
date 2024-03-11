@@ -1,24 +1,26 @@
-import { Application, Graphics, Rectangle } from "pixi.js-legacy";
+import { Application, Graphics, Rectangle } from "pixi.js";
 import { vi } from "vitest";
 import { MouseEventTransmitter } from "../src/index.js";
 import { SkipCounter } from "./SkipCounter.js";
 
-export const generateStage = () => {
+export const generateStage = async () => {
   const spyLog = vi.spyOn(console, "log").mockImplementation((x) => x);
 
   const W = 640;
   const H = 480;
-  const app = new Application({
+  const app = new Application();
+
+  await app.init({
     width: W,
     height: H,
     backgroundColor: 0x666666,
-    forceCanvas: true,
   });
-  document.body.appendChild(app.view as HTMLCanvasElement);
+
+  document.body.appendChild(app.canvas as HTMLCanvasElement);
 
   const size = 128;
   const g = new Graphics();
-  g.beginFill(0xff0000).drawRect(0, 0, size, size).endFill();
+  g.rect(0, 0, size, size).fill(0xff0000);
   g.hitArea = new Rectangle(0, 0, size, size);
   g.position.set(W / 2, H / 2);
   g.eventMode = "static";

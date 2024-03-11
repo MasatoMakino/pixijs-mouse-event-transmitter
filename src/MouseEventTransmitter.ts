@@ -28,7 +28,7 @@ export class MouseEventTransmitter {
   constructor(option: MouseEventTransmitterOption) {
     this.transmitTarget = option.transmitTarget;
     this.rootBoundary = option.app.renderer.events.rootBoundary;
-    this.canvas = option.app.view as HTMLCanvasElement;
+    this.canvas = option.app.canvas as HTMLCanvasElement;
 
     this.start();
 

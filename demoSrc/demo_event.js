@@ -1,19 +1,24 @@
-import { Application, Graphics, Rectangle } from "pixi.js";
+import { Application, Graphics, Rectangle, sayHello } from "pixi.js";
 import { MouseEventTransmitter } from "../esm/index.js";
 
 /**
  * DOMContentLoaded後の初期化処理。
  * デモに必要なパーツを一式初期化する。
  */
-const onDomContentsLoaded = () => {
-  const app = new Application({
+const onDomContentsLoaded = async () => {
+  const app = new Application();
+
+  await app.init({
     width: 640,
     height: 600,
     backgroundColor: 0x666666,
   });
-  document.body.appendChild(app.view);
+
+  sayHello(app.renderer.name);
+
+  document.body.appendChild(app.canvas);
   const g = new Graphics();
-  g.beginFill(0xff0000).drawRect(0, 0, 32, 32).endFill();
+  g.rect(0, 0, 32, 32).fill(0xff0000);
   g.hitArea = new Rectangle(0, 0, 32, 32);
   g.position.set(32);
   g.eventMode = "static";
