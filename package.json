@@ -40,7 +40,7 @@
     "webdriverio": "^8.33.1"
   },
   "peerDependencies": {
-    "pixi.js": "^8.0.0"
+    "pixi.js": "^8.0.4"
   },
   "scripts": {
     "prepare": "husky",
