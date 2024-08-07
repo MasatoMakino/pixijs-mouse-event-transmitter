@@ -1,13 +1,15 @@
 name: Publish github pages
 
 on:
-  push:
-    branches: [main]
   pull_request:
+    branches:
+      - main
+    types: [closed]
 
 jobs:
   publish_gh_pages:
     runs-on: ubuntu-22.04
+    if: github.event.pull_request.merged == true
     permissions:
       contents: write
     steps:
@@ -25,7 +27,7 @@ jobs:
         run: npm run demo
       - name: Deploy Github pages
         uses: peaceiris/actions-gh-pages@v4
-        if: github.ref == 'refs/heads/main'
+        if: ${{ github.ref == 'refs/heads/main' }}
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./docs
