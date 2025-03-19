@@ -12,7 +12,10 @@ const onDomContentsLoaded = async () => {
     width: 640,
     height: 600,
     backgroundColor: 0x666666,
+    resolution: window.devicePixelRatio || 1,
   });
+  app.canvas.style.width = `${app.screen.width}px`;
+  app.canvas.style.height = `${app.screen.height}px`;
 
   sayHello(app.renderer.name);
 
@@ -36,7 +39,7 @@ const onDomContentsLoaded = async () => {
   });
 
   canvas.addEventListener("pointerdown", (e) => {
-    console.log(e.type);
+    console.log(e.type, e.clientX, e.clientY);
   });
   canvas.addEventListener("pointerup", (e) => {
     console.log(e.type);
