@@ -1,4 +1,4 @@
-import { Application, Ticker, EventBoundary } from "pixi.js";
+import type { Application, EventBoundary } from "pixi.js";
 
 export interface MouseEventTransmitterOption {
   transmitTarget: HTMLElement;

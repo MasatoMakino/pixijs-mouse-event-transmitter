@@ -33,7 +33,7 @@ const onDomContentsLoaded = async () => {
   canvas.height = 600;
   document.body.appendChild(canvas);
 
-  const transmitter = new MouseEventTransmitter({
+  new MouseEventTransmitter({
     transmitTarget: canvas,
     app: app,
   });
