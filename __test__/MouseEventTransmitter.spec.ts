@@ -1,5 +1,5 @@
 import {
-  FakeMouseEventInit,
+  type FakeMouseEventInit,
   getMouseEvent,
 } from "@masatomakino/fake-mouse-event";
 import { beforeEach, describe, expect, test } from "vitest";
