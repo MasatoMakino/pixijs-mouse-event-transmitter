@@ -26,6 +26,7 @@
   "author": "MasatoMakino <unagiinu.g@gmail.com>",
   "license": "MIT",
   "devDependencies": {
+    "@biomejs/biome": "2.0.5",
     "@masatomakino/fake-mouse-event": "^0.2.0",
     "@masatomakino/gulptask-demo-page": "^0.10.0",
     "@masatomakino/release-helper": "^0.2.0",
@@ -34,7 +35,6 @@
     "browser-sync": "^3.0.2",
     "husky": "^9.0.10",
     "lint-staged": "^16.1.0",
-    "prettier": "^3.0.1",
     "typedoc": "^0.28.0",
     "typescript": "^5.4.3",
     "webdriverio": "^9.0.1"
@@ -46,7 +46,7 @@
     "prepare": "husky",
     "test": "vitest --run",
     "coverage": "vitest --run --coverage",
-    "test:watch": "vitest",    
+    "test:watch": "vitest",
     "preversion": "npx @masatomakino/release-helper preversion",
     "postversion": "npx @masatomakino/release-helper postversion",
     "release": "npx @masatomakino/release-helper release",
@@ -67,6 +67,6 @@
     "lib": "esm"
   },
   "lint-staged": {
-    "*.{js,ts,css,md}": "prettier --write"
+    "*.{js,ts,css,md}": "biome check --write"
   }
 }
