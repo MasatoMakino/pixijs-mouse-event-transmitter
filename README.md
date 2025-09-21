@@ -4,8 +4,6 @@
 
 [![MIT License](http://img.shields.io/badge/license-MIT-blue.svg?style=flat)](LICENSE)
 [![CI](https://github.com/MasatoMakino/pixijs-mouse-event-transmitter/actions/workflows/ci.yml/badge.svg)](https://github.com/MasatoMakino/pixijs-mouse-event-transmitter/actions/workflows/ci.yml)
-[![Test Coverage](https://api.codeclimate.com/v1/badges/7131362c8f55827fdb2e/test_coverage)](https://codeclimate.com/github/MasatoMakino/pixijs-mouse-event-transmitter/test_coverage)
-[![Maintainability](https://api.codeclimate.com/v1/badges/7131362c8f55827fdb2e/maintainability)](https://codeclimate.com/github/MasatoMakino/pixijs-mouse-event-transmitter/maintainability)
 
 [![ReadMe Card](https://github-readme-stats.vercel.app/api/pin/?username=MasatoMakino&repo=pixijs-mouse-event-transmitter)](https://github.com/MasatoMakino/pixijs-mouse-event-transmitter)
 
